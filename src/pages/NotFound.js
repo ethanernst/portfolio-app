@@ -1,12 +1,10 @@
-import Layout from '../components/Layout';
+import PageLayout from '../components/Layout/PageLayout';
 
 function NotFound() {
   return (
-    <Layout>
-      <div className="content">
-        <h1 className="title">Page not found</h1>
-      </div>
-    </Layout>
+    <PageLayout>
+      <h1 className="title">Page not found</h1>
+    </PageLayout>
   );
 }
 

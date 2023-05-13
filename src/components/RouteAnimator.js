@@ -1,8 +1,5 @@
-import { createRef } from 'react';
 import { useOutlet, useLocation } from 'react-router-dom';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
-
-import Navigator from './Navigator';
 
 function RouteAnimator(props) {
   const routes = props.routes;
@@ -13,13 +10,15 @@ function RouteAnimator(props) {
   const currentRoute =
     routes.find(route => route.path === location.pathname) ?? {};
   const { nodeRef } = currentRoute;
-  const navRef = createRef();
 
   const pageAnimation = currentRoute.animation;
-  const navigatorAnimation = 'nav-' + currentRoute.animation;
 
   return (
     <>
+      {/* 
+
+      === Testing multiple animated layers on one page change ===
+
       <SwitchTransition>
         <CSSTransition
           key={location.pathname}
@@ -34,7 +33,7 @@ function RouteAnimator(props) {
             </div>
           )}
         </CSSTransition>
-      </SwitchTransition>
+      </SwitchTransition> */}
       <SwitchTransition>
         <CSSTransition
           key={location.pathname}

@@ -1,12 +1,21 @@
-import Layout from '../components/Layout';
+import PageLayout from '../components/Layout/PageLayout';
+import Card from '../components/UI/Card';
+import HomeButton from '../components/Nav/HomeButton';
+
+import testImg from '../images/test-image.jpg';
 
 function About() {
   return (
-    <Layout layout="right">
-      <div className="content">
-        <h1 className="title">About</h1>
+    <PageLayout>
+      <div className="header">
+        <h1 className="title">/about</h1>
+        <h2 className="subtitle">About me</h2>
       </div>
-    </Layout>
+      <div className="content"></div>
+      <div className="nav">
+        <HomeButton />
+      </div>
+    </PageLayout>
   );
 }
 

@@ -1,17 +1,37 @@
+:root {
+  --background: #2d2a2e;
+  --white: #fcfcfa;
+  --white-transparent: #fcfcfa55;
+  --gray: #838182;
+  --green: #70beaf;
+  --purple: #816eed;
+  --orange: #ed7a4f;
+  --red: #ff5d7b;
+
+  --z-index-floating: 50;
+  --z-index-nav: 10;
+  --z-index-nav-image: 12;
+  --z-index-nav-links: 15;
+  --z-index-content: 20;
+}
+
 html,
-body {
-  height: 100%;
-  width: 100%;
+body,
+#root {
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   margin: 0;
   padding: 0;
-  font-family: 'Press Start 2P', cursive;
-  background-color: #353535;
+  font-family: 'Martian Mono', monospace;
+  background-color: var(--background);
 }
 
 .panel {
-  height: 100vh;
-  width: 100vw;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .center-enter {
@@ -102,36 +122,52 @@ body {
   transition: opacity 200ms, transform 200ms;
 }
 
-.navigator {
-  position: fixed;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  z-index: 100;
+.up-enter {
+  opacity: 0;
+  transform: translateY(-100%);
 }
 
-/* Navigation transition animations */
+.up-enter-active {
+  transform: translateY(0%);
+  opacity: 1;
+  transition: opacity 200ms, transform 200ms;
+}
+
+.up-exit {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.up-exit-active {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: opacity 200ms, transform 200ms;
+}
+
+.navigator {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 15rem;
+  bottom: 0;
+  z-index: var(--z-index-nav);
+}
+
 .nav-center-enter {
   opacity: 1;
 }
 
 .nav-center-enter-active {
   opacity: 1;
-  transition: opacity 200ms ease-in-out;
 }
 
 .nav-center-exit {
-  top: 80%;
-  left: 50%;
+  bottom: 0;
 }
 
 .nav-center-exit-active {
-  top: 120%;
-  left: 50%;
+  bottom: -150;
   transition: all 200ms ease-in-out;
 }
 

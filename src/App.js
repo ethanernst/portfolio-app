@@ -4,9 +4,10 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RouteAnimator from './components/RouteAnimator';
 
 import Home from './pages/Home';
+import Videos from './pages/Videos';
 import About from './pages/About';
-import Contact from './pages/Contact';
 import Projects from './pages/Projects';
+import Art from './pages/Art';
 import NotFound from './pages/NotFound';
 
 const routes = [
@@ -25,17 +26,24 @@ const routes = [
     nodeRef: createRef(),
   },
   {
-    path: '/contact',
-    name: 'Contact',
+    path: '/about',
+    name: 'About',
     animation: 'down',
-    element: <Contact />,
+    element: <About />,
     nodeRef: createRef(),
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/videos',
+    name: 'Videos',
     animation: 'right',
-    element: <About />,
+    element: <Videos />,
+    nodeRef: createRef(),
+  },
+  {
+    path: '/art',
+    name: 'Art',
+    animation: 'up',
+    element: <Art />,
     nodeRef: createRef(),
   },
   {
