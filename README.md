@@ -2,14 +2,15 @@
 
 A React.js project to showcase projects that I am working on
 
-[View page](https://ethanernst.github.io/portfolio-app/)
+[View page](https://ethanernst.github.io/portfolio-app/) (currently broken due to github pages routing issues, fix coming soon)
 
 ## To-Do
 
-- [ ] Rework PageLayout to act as a page builder, update pages to return chunks to be built
-  - [ ] Improve page themeing
-  - [ ] Fix bugs around dynamic page layout
-- [ ] Homepage redesign, currently very resource heavy
+- [x] Rework PageLayout to act as a page builder, update pages to return chunks to be built
+  - [x] Fix bugs around dynamic page layout
+  - [x] Improve page themeing
+- [ ] Homepage redesign and cleanup, currently very messy
+- [ ] Update / fix hosting, possibly move to Netlify
 - [ ] Improve adaptation to window size changes and overall experience across different screen sizes
 - [ ] Migrate project from CRA to Vite
 - [ ] Add content to the About page

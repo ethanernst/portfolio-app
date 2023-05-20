@@ -8,7 +8,7 @@ import defaultImg from '../images/backgrounds/background.webp';
 import codeImg from '../images/backgrounds/projects.webp';
 import dronesImg from '../images/backgrounds/videos.webp';
 import aboutImg from '../images/backgrounds/about.webp';
-import artImg from '../images/backgrounds/art.webp';
+import rendersImg from '../images/backgrounds/renders.webp';
 
 function Home() {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ function Home() {
         imgSrc = dronesImg;
         break;
       case 'art':
-        imgSrc = artImg;
+        imgSrc = rendersImg;
         break;
       case 'about':
         imgSrc = aboutImg;
@@ -58,7 +58,7 @@ function Home() {
   const handleNavigate = () => {
     if (!activeLink) return;
 
-    navigate(`/${activeLink}`);
+    navigate(`/${activeLink}`, { state: { fromHome: true } });
   };
 
   const handleImageLoad = () => {
@@ -120,18 +120,18 @@ function Home() {
           <button
             className={`top ${
               activeLink
-                ? activeLink === 'art'
+                ? activeLink === 'renders'
                   ? 'btn-active'
                   : 'btn-inactive'
                 : ''
             }`}
-            value="art"
+            value="renders"
             type="button"
             onMouseEnter={handleHover}
             onMouseLeave={handleReset}
             onClick={handleNavigate}
           >
-            3D
+            Renders
           </button>
           <button
             className={`right ${

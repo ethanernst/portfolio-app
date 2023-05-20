@@ -5,31 +5,31 @@ import HomeButton from '../components/Nav/HomeButton';
 
 import testImg from '../images/test-image.jpg';
 
-function Videos() {
-  const TITLE = ''; // optional, null blank the title with be the location.pathname
-  const SUBTITLE = 'My latest videos, probably mostly FPV content';
+function Renders() {
+  const TITLE = ''; // optional, if null the title with be the location.pathname
+  const SUBTITLE = 'A showcase for my 3d projects';
 
   const CONTENT = (
     <>
       <Card
         image={testImg}
         title={'Coming soon!'}
-        description={'Another project on the timeline'}
+        description={'Another render crunching away'}
       />
       <Card
         image={testImg}
         title={'Coming soon!'}
-        description={'Another project on the timeline'}
+        description={'Another render crunching away'}
       />
       <Card
         image={testImg}
         title={'Coming soon!'}
-        description={'Another project on the timeline'}
+        description={'Another render crunching away'}
       />
       <Card
         image={testImg}
         title={'Coming soon!'}
-        description={'Another project on the timeline'}
+        description={'Another render crunching away'}
       />
     </>
   );
@@ -46,4 +46,4 @@ function Videos() {
   );
 }
 
-export default Videos;
+export default Renders;

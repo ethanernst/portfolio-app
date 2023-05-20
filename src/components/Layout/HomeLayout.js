@@ -79,7 +79,6 @@ const Container = styled.div`
       padding: 0;
       margin: 0;
       border: none;
-      color: inherit;
       font: inherit;
       outline: inherit;
       font-size: 2rem;
@@ -92,7 +91,7 @@ const Container = styled.div`
 
     .btn-active {
       background-color: var(--white);
-      color: var(--background);
+      color: var(--black);
     }
 
     .btn-inactive {
