@@ -160,9 +160,24 @@ const Nav = styled.div`
     transition: all 0.2s ease-out;
   }
 
-  button:hover {
-    color: var(--black);
-    background-color: var(--white);
+  .projects:hover {
+    border-color: var(--projects);
+    background-color: var(--projects);
+  }
+
+  .videos:hover {
+    border-color: var(--videos);
+    background-color: var(--videos);
+  }
+
+  .renders:hover {
+    border-color: var(--renders);
+    background-color: var(--renders);
+  }
+
+  .about:hover {
+    border-color: var(--about);
+    background-color: var(--about);
   }
 `;
 

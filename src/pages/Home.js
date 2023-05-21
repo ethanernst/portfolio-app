@@ -65,20 +65,22 @@ function Home() {
     route => route.path === activeLink
   )?.animation;
 
-  const POPOUTS = directions.map(direction => {
+  const POPOUTS = directions.map((direction, i) => {
     const classes =
       direction === activeDirection
         ? `${direction} ${direction}-active`
         : direction;
 
-    return <div className={classes} />;
+    return <div className={classes} key={i} />;
   });
 
   const NAV = (
     <>
       <button
+        key={1}
         value="/projects"
         type="button"
+        className="projects"
         onMouseEnter={handleHover}
         onMouseLeave={handleReset}
         onClick={handleNavigate}
@@ -86,8 +88,10 @@ function Home() {
         Projects
       </button>
       <button
+        key={2}
         value="/videos"
         type="button"
+        className="videos"
         onMouseEnter={handleHover}
         onMouseLeave={handleReset}
         onClick={handleNavigate}
@@ -95,8 +99,10 @@ function Home() {
         Videos
       </button>
       <button
+        key={3}
         value="/renders"
         type="button"
+        className="renders"
         onMouseEnter={handleHover}
         onMouseLeave={handleReset}
         onClick={handleNavigate}
@@ -104,8 +110,10 @@ function Home() {
         Renders
       </button>
       <button
+        key={4}
         value="/about"
         type="button"
+        className="about"
         onMouseEnter={handleHover}
         onMouseLeave={handleReset}
         onClick={handleNavigate}
@@ -121,7 +129,7 @@ function Home() {
       title={TITLE}
       nav={NAV}
       popouts={POPOUTS}
-    ></HomeLayout>
+    />
   );
 }
 

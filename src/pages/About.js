@@ -11,12 +11,7 @@ function About() {
   const NAV = <HomeButton />;
 
   return (
-    <PageLayout
-      title={TITLE}
-      subtitle={SUBTITLE}
-      content={CONTENT}
-      nav={NAV}
-    ></PageLayout>
+    <PageLayout title={TITLE} subtitle={SUBTITLE} content={CONTENT} nav={NAV} />
   );
 }
 
