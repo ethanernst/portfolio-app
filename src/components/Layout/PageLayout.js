@@ -38,7 +38,7 @@ function handleLayout(layout) {
 
 let backgroundColor = '';
 
-// hanlder for dynamic page themes
+// handler for dynamic page themes
 function handleTheme(layout) {
   switch (layout) {
     case '/projects':

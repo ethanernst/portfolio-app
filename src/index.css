@@ -15,6 +15,7 @@ body,
   padding: 0;
   height: 100%;
   width: 100%;
+  transition: opacity 200ms, transform 200ms;
 }
 
 .center-enter {
@@ -25,7 +26,6 @@ body,
 .center-enter-active {
   transform: scale(1);
   opacity: 1;
-  transition: opacity 200ms, transform 200ms;
 }
 
 .center-exit {
@@ -36,7 +36,6 @@ body,
 .center-exit-active {
   transform: scale(0.9);
   opacity: 0;
-  transition: opacity 200ms, transform 200ms;
 }
 
 .left-enter {
@@ -47,7 +46,6 @@ body,
 .left-enter-active {
   transform: translateX(0%);
   opacity: 1;
-  transition: opacity 200ms, transform 200ms;
 }
 
 .left-exit {
@@ -58,7 +56,6 @@ body,
 .left-exit-active {
   transform: translateX(-100%);
   opacity: 0;
-  transition: opacity 200ms, transform 200ms;
 }
 
 .right-enter {
@@ -69,7 +66,6 @@ body,
 .right-enter-active {
   transform: translateX(0%);
   opacity: 1;
-  transition: opacity 200ms, transform 200ms;
 }
 
 .right-exit {
@@ -80,7 +76,6 @@ body,
 .right-exit-active {
   transform: translateX(100%);
   opacity: 0;
-  transition: opacity 200ms, transform 200ms;
 }
 
 .down-enter {
@@ -91,7 +86,6 @@ body,
 .down-enter-active {
   transform: translateY(0%);
   opacity: 1;
-  transition: opacity 200ms, transform 200ms;
 }
 
 .down-exit {
@@ -102,7 +96,6 @@ body,
 .down-exit-active {
   transform: translateY(100%);
   opacity: 0;
-  transition: opacity 200ms, transform 200ms;
 }
 
 .up-enter {
@@ -113,7 +106,6 @@ body,
 .up-enter-active {
   transform: translateY(0%);
   opacity: 1;
-  transition: opacity 200ms, transform 200ms;
 }
 
 .up-exit {
@@ -124,113 +116,4 @@ body,
 .up-exit-active {
   transform: translateY(-100%);
   opacity: 0;
-  transition: opacity 200ms, transform 200ms;
 }
-
-/* .navigator {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 15rem;
-  bottom: 0;
-  z-index: var(--z-index-nav);
-}
-
-.nav-center-enter {
-  opacity: 1;
-}
-
-.nav-center-enter-active {
-  opacity: 1;
-}
-
-.nav-center-exit {
-  bottom: 0;
-}
-
-.nav-center-exit-active {
-  bottom: -150;
-  transition: all 200ms ease-in-out;
-}
-
-.nav-left-enter {
-  top: 120%;
-  left: 80%;
-}
-
-.nav-left-enter-active {
-  top: 80%;
-  left: 80%;
-  transition: all 200ms ease-in-out;
-}
-
-.nav-left-enter-done {
-  top: 80%;
-  left: 80%;
-}
-
-.nav-left-exit {
-  top: 80%;
-  left: 80%;
-}
-
-.nav-left-exit-active {
-  top: 80%;
-  left: 50%;
-  transition: all 200ms ease-in-out;
-}
-
-.nav-right-enter {
-  top: 120%;
-  left: 20%;
-}
-
-.nav-right-enter-active {
-  top: 80%;
-  left: 20%;
-  transition: all 200ms ease-in-out;
-}
-
-.nav-right-enter-done {
-  top: 80%;
-  left: 20%;
-}
-
-.nav-right-exit {
-  top: 80%;
-  left: 20%;
-}
-
-.nav-right-exit-active {
-  top: 80%;
-  left: 50%;
-  transition: all 200ms ease-in-out;
-}
-
-.nav-down-enter {
-  top: -20%;
-  left: 50%;
-}
-
-.nav-down-enter-active {
-  top: 20%;
-  left: 50%;
-  transition: all 200ms ease-in-out;
-}
-
-.nav-down-enter-done {
-  top: 20%;
-  left: 50%;
-}
-
-.nav-down-exit {
-  top: 20%;
-  left: 50%;
-}
-
-.nav-down-exit-active {
-  top: 80%;
-  left: 50%;
-  transition: all 200ms ease-in-out;
-} */

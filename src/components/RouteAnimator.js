@@ -14,42 +14,20 @@ function RouteAnimator(props) {
   const pageAnimation = currentRoute.animation;
 
   return (
-    <>
-      {/* 
-
-      === Testing multiple animated layers on one page change ===
-
-      <SwitchTransition>
-        <CSSTransition
-          key={location.pathname}
-          nodeRef={navRef}
-          timeout={200}
-          classNames={navigatorAnimation}
-          unmountOnExit
-        >
-          {_ => (
-            <div ref={navRef} className={'navigator'}>
-              <Navigator routes={routes} />
-            </div>
-          )}
-        </CSSTransition>
-      </SwitchTransition> */}
-      <SwitchTransition>
-        <CSSTransition
-          key={location.pathname}
-          nodeRef={nodeRef}
-          timeout={200}
-          classNames={pageAnimation}
-          unmountOnExit
-        >
-          {_ => (
-            <div ref={nodeRef} className={'panel'}>
-              {currentPageOutlet}
-            </div>
-          )}
-        </CSSTransition>
-      </SwitchTransition>
-    </>
+    <SwitchTransition>
+      <CSSTransition
+        key={location.pathname}
+        nodeRef={nodeRef}
+        timeout={200}
+        classNames={pageAnimation}
+      >
+        {_ => (
+          <div ref={nodeRef} className={'panel'}>
+            {currentPageOutlet}
+          </div>
+        )}
+      </CSSTransition>
+    </SwitchTransition>
   );
 }
 

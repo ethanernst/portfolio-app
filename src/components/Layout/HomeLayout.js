@@ -15,151 +15,168 @@ const Container = styled.div`
     top: 50%;
     left: 50%;
 
-    filter: brightness(75%);
+    /* filter: brightness(75%); */
     transition: transform 150ms ease-out;
 
     z-index: var(--z-index-home-background);
   }
+`;
 
-  .background-transition-enter {
+const Popouts = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  transition: all 0.2s ease-out;
+  z-index: var(--z-index-home-popout);
+
+  .up {
+    position: inherit;
+    width: 100%;
+    height: 10%;
+    left: 0;
+    top: 0;
+    transform: translateY(-100%);
     opacity: 0;
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+
+    transition: all 0.2s ease-in-out;
+    background-color: var(--renders);
   }
 
-  .background-transition-enter-active {
+  .up-active {
     opacity: 1;
-    transition: opacity 300ms ease-in-out;
+    transform: translateY(0%);
   }
 
-  .background-transition-exit {
-    opacity: 1;
-  }
-
-  .background-transition-exit-active {
+  .down {
+    position: inherit;
+    width: 100%;
+    height: 10%;
+    left: 0;
+    bottom: 0;
+    transform: translateY(100%);
     opacity: 0;
-    transition: opacity 300ms ease-in-out;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+
+    transition: all 0.2s ease-in-out;
+    background-color: var(--about);
   }
 
-  .island {
-    position: relative;
-    width: 75vh;
-    height: 75vh;
-
-    display: grid;
-    grid-template-columns: repeat(5, 20%);
-    grid-template-rows: repeat(5, 20%);
-    border-radius: 10px;
-
-    z-index: var(--z-index-home-content);
+  .down-active {
+    opacity: 1;
+    transform: translateY(0%);
   }
 
-  /* attempt at responsive island sizing, needs work */
-  @media screen and (min-height: 1100px) {
-    .island {
-      width: 75vw;
-      height: 75vw;
-    }
+  .left {
+    position: inherit;
+    width: 10%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    opacity: 0;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+
+    transition: all 0.2s ease-in-out;
+    background-color: var(--projects);
   }
 
-  @media screen and (min-width: 1100px) {
-    .island {
-      width: 75vh;
-      height: 75vh;
-    }
+  .left-active {
+    opacity: 1;
+    transform: translateX(0%);
   }
 
-  .nav {
-    grid-column: 1 / span 5;
-    grid-row: 1 / span 5;
-    display: grid;
-    grid-template-columns: repeat(5, 20%);
-    grid-template-rows: repeat(5, 20%);
+  .right {
+    position: inherit;
+    width: 10%;
+    height: 100%;
+    right: 0px;
+    top: 0;
+    transform: translateX(100%);
+    opacity: 0;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
 
-    button {
-      opacity: 1;
-      padding: 0;
-      margin: 0;
-      border: none;
-      font: inherit;
-      outline: inherit;
-      font-size: 2rem;
-
-      color: var(--white);
-      background-color: var(--transparent);
-      backdrop-filter: blur(5px);
-      transition: opacity 0.2s ease-out;
-    }
-
-    .btn-active {
-      background-color: var(--white);
-      color: var(--black);
-    }
-
-    .btn-inactive {
-      opacity: 0.5;
-    }
-
-    .top {
-      grid-area: 1 / 2 / span 1 / span 3;
-      border-top-left-radius: 25px;
-      border-top-right-radius: 25px;
-    }
-
-    .right {
-      grid-area: 2 / 5 / span 3 / span 1;
-      border-top-right-radius: 25px;
-      border-bottom-right-radius: 25px;
-    }
-
-    .bottom {
-      grid-area: 5 / 2 / span 1 / span 3;
-      border-bottom-left-radius: 25px;
-      border-bottom-right-radius: 25px;
-    }
-
-    .left {
-      grid-area: 2 / 1 / span 3 / span 1;
-      border-top-left-radius: 25px;
-      border-bottom-left-radius: 25px;
-    }
+    transition: all 0.2s ease-in-out;
+    background-color: var(--videos);
   }
 
-  .content {
-    grid-row: 2 / span 3;
-    grid-column: 2 / span 3;
+  .right-active {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+`;
+
+const Content = styled.div`
+  width: 75vh;
+  height: 75vh;
+
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: repeat(4, 25%);
+
+  z-index: var(--z-index-home-content);
+
+  h1 {
+    grid-row: 1 / span 2;
+    grid-column: 1 / span 4;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
 
-    opacity: 1;
-    transition: opacity 0.2s ease-out;
-    background-color: var(--transparent);
-    backdrop-filter: blur(5px);
-
-    a {
-      text-decoration: none;
-    }
-
-    .title {
-      margin: 0;
-      font-size: 5rem;
-      color: var(--white);
-    }
-    .subtitle {
-      font-size: 3rem;
-      font-weight: bold;
-      color: var(--white);
-    }
-  }
-
-  .nav-active {
-    opacity: 0.5;
+    margin: 0;
+    font-size: 7rem;
+    color: var(--white);
   }
 `;
 
-function HomeLayout(props) {
-  return <Container>{props.children}</Container>;
+const Nav = styled.div`
+  grid-row: 3 / span 2;
+  grid-column: 1 / span 4;
+
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+
+  button {
+    font: inherit;
+    border: 1px solid var(--white);
+    border-radius: 1rem;
+
+    flex: auto;
+    padding: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    justify-content: center;
+
+    color: var(--white);
+    background-color: var(--transparent);
+    backdrop-filter: blur(5px);
+    transition: all 0.2s ease-out;
+  }
+
+  button:hover {
+    color: var(--black);
+    background-color: var(--white);
+  }
+`;
+
+function HomeLayout({ backgroundImg, title, nav, popouts }) {
+  return (
+    <Container>
+      {backgroundImg}
+      <Popouts>{popouts}</Popouts>
+      <Content>
+        <h1>{title || 'Welcome'}</h1>
+        <Nav>{nav}</Nav>
+      </Content>
+    </Container>
+  );
 }
 
 export default HomeLayout;

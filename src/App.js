@@ -10,7 +10,7 @@ import Renders from './pages/Renders';
 import Videos from './pages/Videos';
 import NotFound from './pages/NotFound';
 
-const routes = [
+export const routes = [
   {
     path: '/',
     name: 'Home',

@@ -13,11 +13,8 @@ const GlobalStyle = createGlobalStyle`
   --about: #ED7A4F;
 
   --z-index-home-background: 0;
+  --z-index-home-popout: 25;
   --z-index-home-content: 50;
-  --z-index-nav: 10;
-  --z-index-nav-links: 15;
-  --z-index-nav-button: 20;
-  --z-index-content: 20;
   }
 `;
 

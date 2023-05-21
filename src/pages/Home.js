@@ -1,46 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
+import { routes } from '../App';
 import HomeLayout from '../components/Layout/HomeLayout';
 
-import defaultImg from '../images/backgrounds/background.webp';
-import codeImg from '../images/backgrounds/projects.webp';
-import dronesImg from '../images/backgrounds/videos.webp';
-import aboutImg from '../images/backgrounds/about.webp';
-import rendersImg from '../images/backgrounds/renders.webp';
+import backgroundImg from '../images/backgrounds/background.webp';
 
 function Home() {
   const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [image, setImage] = useState(defaultImg);
-  const [imageLoaded, setImageLoaded] = useState(true);
-
-  // returns the correct image based on the active link
-  const getImageFromLink = () => {
-    let imgSrc;
-
-    switch (activeLink) {
-      case 'projects':
-        imgSrc = codeImg;
-        break;
-      case 'videos':
-        imgSrc = dronesImg;
-        break;
-      case 'art':
-        imgSrc = rendersImg;
-        break;
-      case 'about':
-        imgSrc = aboutImg;
-        break;
-      default:
-        imgSrc = defaultImg;
-        break;
-    }
-
-    return imgSrc;
-  };
 
   // handler functions
   const handleHover = element => {
@@ -58,24 +27,8 @@ function Home() {
   const handleNavigate = () => {
     if (!activeLink) return;
 
-    navigate(`/${activeLink}`, { state: { fromHome: true } });
+    navigate(activeLink, { state: { fromHome: true } });
   };
-
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
-
-  // background image preloader
-  useEffect(() => {
-    let imgSrc = getImageFromLink();
-    if (imgSrc === image) return;
-    setImageLoaded(false);
-
-    const img = new Image();
-    img.src = imgSrc;
-    img.onload = handleImageLoad;
-    setImage(imgSrc);
-  }, [activeLink]);
 
   // background image animator
   useEffect(() => {
@@ -92,104 +45,83 @@ function Home() {
     };
   }, []);
 
+  const TITLE = 'Welcome';
+
+  const BACKGROUNDIMG = (
+    <img
+      className="background"
+      src={backgroundImg}
+      alt="background"
+      style={{
+        transform: `translate(-50%, -50%) translate(${
+          -cursorPosition.x / 15
+        }px, ${-cursorPosition.y / 15}px)`,
+      }}
+    />
+  );
+
+  const directions = ['up', 'down', 'left', 'right'];
+  const activeDirection = routes.find(
+    route => route.path === activeLink
+  )?.animation;
+
+  const POPOUTS = directions.map(direction => {
+    const classes =
+      direction === activeDirection
+        ? `${direction} ${direction}-active`
+        : direction;
+
+    return <div className={classes} />;
+  });
+
+  const NAV = (
+    <>
+      <button
+        value="/projects"
+        type="button"
+        onMouseEnter={handleHover}
+        onMouseLeave={handleReset}
+        onClick={handleNavigate}
+      >
+        Projects
+      </button>
+      <button
+        value="/videos"
+        type="button"
+        onMouseEnter={handleHover}
+        onMouseLeave={handleReset}
+        onClick={handleNavigate}
+      >
+        Videos
+      </button>
+      <button
+        value="/renders"
+        type="button"
+        onMouseEnter={handleHover}
+        onMouseLeave={handleReset}
+        onClick={handleNavigate}
+      >
+        Renders
+      </button>
+      <button
+        value="/about"
+        type="button"
+        onMouseEnter={handleHover}
+        onMouseLeave={handleReset}
+        onClick={handleNavigate}
+      >
+        About
+      </button>
+    </>
+  );
+
   return (
-    <HomeLayout>
-      <TransitionGroup>
-        {imageLoaded && (
-          <CSSTransition
-            timeout={300}
-            classNames="background-transition"
-            key={image}
-          >
-            <img
-              className="background"
-              src={image}
-              alt="background"
-              style={{
-                transform: `translate(-50%, -50%) translate(${
-                  -cursorPosition.x / 15
-                }px, ${-cursorPosition.y / 15}px)`,
-              }}
-              onLoad={handleImageLoad}
-            />
-          </CSSTransition>
-        )}
-      </TransitionGroup>
-      <div className="island">
-        <div className="nav">
-          <button
-            className={`top ${
-              activeLink
-                ? activeLink === 'renders'
-                  ? 'btn-active'
-                  : 'btn-inactive'
-                : ''
-            }`}
-            value="renders"
-            type="button"
-            onMouseEnter={handleHover}
-            onMouseLeave={handleReset}
-            onClick={handleNavigate}
-          >
-            Renders
-          </button>
-          <button
-            className={`right ${
-              activeLink
-                ? activeLink === 'videos'
-                  ? 'btn-active'
-                  : 'btn-inactive'
-                : ''
-            }`}
-            value="videos"
-            type="button"
-            onMouseEnter={handleHover}
-            onMouseLeave={handleReset}
-            onClick={handleNavigate}
-          >
-            Videos
-          </button>
-          <button
-            className={`bottom ${
-              activeLink
-                ? activeLink === 'about'
-                  ? 'btn-active'
-                  : 'btn-inactive'
-                : ''
-            }`}
-            value="about"
-            type="button"
-            onMouseEnter={handleHover}
-            onMouseLeave={handleReset}
-            onClick={handleNavigate}
-          >
-            About
-          </button>
-          <button
-            className={`left ${
-              activeLink
-                ? activeLink === 'projects'
-                  ? 'btn-active'
-                  : 'btn-inactive'
-                : ''
-            }`}
-            value="projects"
-            type="button"
-            onMouseEnter={handleHover}
-            onMouseLeave={handleReset}
-            onClick={handleNavigate}
-          >
-            Projects
-          </button>
-        </div>
-        <div className={`content ${activeLink ? 'nav-active' : ''}`}>
-          <h1 className="title">Welcome</h1>
-          {/* <a className="subtitle" href="http://www.github.com/ethanernst">
-            <span>git</span>
-          </a> */}
-        </div>
-      </div>
-    </HomeLayout>
+    <HomeLayout
+      backgroundImg={BACKGROUNDIMG}
+      title={TITLE}
+      nav={NAV}
+      popouts={POPOUTS}
+    ></HomeLayout>
   );
 }
 
