@@ -1,63 +1,6 @@
+import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-
-let headerLayout = '';
-let contentLayout = '';
-let navLayout = '';
-
-// handler for dynamic page layouts
-function handleLayout(layout) {
-  switch (layout) {
-    case '/projects':
-      headerLayout = ['1 / span 2', '1 / span 10;'];
-      contentLayout = ['3 / span 10', '1 / span 8;'];
-      navLayout = ['3 / span 10', '9 / span 10;'];
-      break;
-    case '/videos':
-      headerLayout = ['1 / span 2', '1 / span 10;'];
-      contentLayout = ['3 / span 10', '3 / span 10;'];
-      navLayout = ['3 / span 10', '1 / span 2;'];
-      break;
-    case '/renders':
-      headerLayout = ['9 / span 10', '1 / span 7;'];
-      contentLayout = ['1 / span 8', '1 / span 10;'];
-      navLayout = ['9 / span 10', '8 / span 10;'];
-      break;
-    case '/about':
-      headerLayout = ['1 / span 2', '1 / span 7;'];
-      contentLayout = ['3 / span 10', '1 / span 10;'];
-      navLayout = ['1 / span 2', '8 / span 10;'];
-      break;
-    default: // used for the 404 page
-      headerLayout = ['2 / span 4', '3 / span 6;'];
-      contentLayout = ['1 / span 10', '1 / span 10;'];
-      navLayout = ['6 / span 4', '3 / span 6;'];
-      break;
-  }
-}
-
-let backgroundColor = '';
-
-// handler for dynamic page themes
-function handleTheme(layout) {
-  switch (layout) {
-    case '/projects':
-      backgroundColor = 'var(--projects)';
-      break;
-    case '/videos':
-      backgroundColor = 'var(--videos)';
-      break;
-    case '/renders':
-      backgroundColor = 'var(--renders)';
-      break;
-    case '/about':
-      backgroundColor = 'var(--about)';
-      break;
-    default: // used for the 404 page
-      backgroundColor = 'var(--black)';
-      break;
-  }
-}
 
 const Background = styled.main`
   display: grid;
@@ -119,12 +62,67 @@ const Nav = styled.div`
   background-color: var(--black);
 `;
 
+// handler for dynamic page layouts
+function handleLayout(layout) {
+  switch (layout) {
+    case '/projects':
+      return [
+        ['1 / span 2', '1 / span 10;'], // headerLayout
+        ['3 / span 10', '1 / span 8;'], // contentLayout
+        ['3 / span 10', '9 / span 10;'], // navLayout
+      ];
+    case '/videos':
+      return [
+        ['1 / span 2', '1 / span 10;'], // headerLayout
+        ['3 / span 10', '3 / span 10;'], // contentLayout
+        ['3 / span 10', '1 / span 2;'], // navLayout
+      ];
+    case '/renders':
+      return [
+        ['9 / span 10', '1 / span 7;'], // headerLayout
+        ['1 / span 8', '1 / span 10;'], // contentLayout
+        ['9 / span 10', '8 / span 10;'], // navLayout
+      ];
+    case '/about':
+      return [
+        ['1 / span 2', '1 / span 7;'], // headerLayout
+        ['3 / span 10', '1 / span 10;'], // contentLayout
+        ['1 / span 2', '8 / span 10;'], // navLayout
+      ];
+    default: // used for the 404 page
+      return [
+        ['2 / span 4', '3 / span 6;'], // headerLayout
+        ['1 / span 10', '1 / span 10;'], // contentLayout
+        ['6 / span 4', '3 / span 6;'], // navLayout
+      ];
+  }
+}
+
+// handler for dynamic page themes
+function handleTheme(layout) {
+  switch (layout) {
+    case '/projects':
+      return 'var(--projects)';
+    case '/videos':
+      return 'var(--videos)';
+    case '/renders':
+      return 'var(--renders)';
+    case '/about':
+      return 'var(--about)';
+    default: // used for the 404 page
+      return 'var(--black)';
+  }
+}
+
 function PageLayout({ title, subtitle, content, nav }) {
   const location = useLocation();
 
-  const layout = location.pathname;
-  handleLayout(layout);
-  handleTheme(layout);
+  const layout = useMemo(() => location.pathname, []);
+  const [headerLayout, contentLayout, navLayout] = useMemo(
+    () => handleLayout(layout),
+    []
+  );
+  const backgroundColor = useMemo(() => handleTheme(layout), []);
 
   return (
     <Background color={backgroundColor}>

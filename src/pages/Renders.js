@@ -7,11 +7,11 @@ import testImg from '../images/test-image.jpg';
 
 function Renders() {
   const TITLE = ''; // optional, if null the title with be the location.pathname
-  const SUBTITLE = 'A showcase for my 3d projects';
+  const SUBTITLE = 'A place for my 3d projects';
 
   const CONTENT = (
     <>
-      <Card
+      {/* <Card
         image={testImg}
         title={'Coming soon!'}
         description={'Another render crunching away'}
@@ -30,7 +30,7 @@ function Renders() {
         image={testImg}
         title={'Coming soon!'}
         description={'Another render crunching away'}
-      />
+      /> */}
     </>
   );
 

@@ -18,7 +18,7 @@ function Projects() {
   // getRepos();
 
   const TITLE = ''; // optional, if null the title with be the location.pathname
-  const SUBTITLE = 'Here are some projects I have been working on!';
+  const SUBTITLE = 'Here are some projects I have been working on';
 
   const CONTENT = (
     <>

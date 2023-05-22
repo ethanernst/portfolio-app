@@ -74,61 +74,30 @@ function Home() {
     return <div className={classes} key={i} />;
   });
 
-  const NAV = (
-    <>
-      <button
-        key={1}
-        value="/projects"
-        type="button"
-        className="projects"
-        onMouseEnter={handleHover}
-        onMouseLeave={handleReset}
-        onClick={handleNavigate}
-      >
-        Projects
-      </button>
-      <button
-        key={2}
-        value="/videos"
-        type="button"
-        className="videos"
-        onMouseEnter={handleHover}
-        onMouseLeave={handleReset}
-        onClick={handleNavigate}
-      >
-        Videos
-      </button>
-      <button
-        key={3}
-        value="/renders"
-        type="button"
-        className="renders"
-        onMouseEnter={handleHover}
-        onMouseLeave={handleReset}
-        onClick={handleNavigate}
-      >
-        Renders
-      </button>
-      <button
-        key={4}
-        value="/about"
-        type="button"
-        className="about"
-        onMouseEnter={handleHover}
-        onMouseLeave={handleReset}
-        onClick={handleNavigate}
-      >
-        About
-      </button>
-    </>
-  );
+  const pages = ['projects', 'renders', 'about', 'videos'];
+  const NAV = pages.map((page, index) => (
+    <button
+      key={index}
+      type="button"
+      value={`/${page}`}
+      className={page}
+      onMouseEnter={handleHover}
+      onMouseLeave={handleReset}
+      onClick={handleNavigate}
+    >
+      {page[0].toUpperCase() + page.substring(1)}
+    </button>
+  ));
+
+  const SIZE = [window.innerWidth, window.innerHeight];
 
   return (
     <HomeLayout
-      backgroundImg={BACKGROUNDIMG}
       title={TITLE}
-      nav={NAV}
+      backgroundImg={BACKGROUNDIMG}
       popouts={POPOUTS}
+      nav={NAV}
+      size={SIZE}
     />
   );
 }

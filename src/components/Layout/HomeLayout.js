@@ -12,8 +12,10 @@ const Container = styled.div`
 
   .background {
     position: absolute;
+    pointer-events: none;
     top: 50%;
     left: 50%;
+    overflow: hidden;
 
     /* filter: brightness(75%); */
     transition: transform 150ms ease-out;
@@ -163,25 +165,33 @@ const Nav = styled.div`
   .projects:hover {
     border-color: var(--projects);
     background-color: var(--projects);
+    scale: 105%;
   }
 
   .videos:hover {
     border-color: var(--videos);
     background-color: var(--videos);
+    scale: 105%;
   }
 
   .renders:hover {
     border-color: var(--renders);
     background-color: var(--renders);
+    scale: 105%;
   }
 
   .about:hover {
     border-color: var(--about);
     background-color: var(--about);
+    scale: 105%;
   }
 `;
 
-function HomeLayout({ backgroundImg, title, nav, popouts }) {
+// function handleScreen(size) {}
+
+function HomeLayout({ backgroundImg, title, nav, popouts, size }) {
+  // const [width, height] = size;
+
   return (
     <Container>
       {backgroundImg}
