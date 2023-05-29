@@ -1,43 +1,56 @@
+// import { useEffect, useState } from 'react';
+
 import PageLayout from '../components/Layout/PageLayout';
 
-import Card from '../components/UI/Card';
+import ProjectCard from '../components/UI/ProjectCard';
 import HomeButton from '../components/Nav/HomeButton';
 
 import projectsWip from '../images/projects/projectsWip.webp';
 
-// testing pinging github for dynamic project population
-// async function getRepos() {
-//   const repos = await fetch(
-//     'https://api.github.com/users/ethanernst/repos'
-//   ).then(response => response.json());
-
-//   repos.forEach(repo => console.log(repo.contents_url));
-// }
-
 function Projects() {
-  // getRepos();
+  // const [projects, setProjects] = useState([]);
+
+  // useEffect(() => {
+  //   fetch('https://api.github.com/users/ethanernst/repos').then(response =>
+  //     response.json().then(data => setProjects(data))
+  //   );
+  // }, []);
+
+  let projectsList = '';
+  // if (projects) {
+  //   projectsList = projects.forEach(
+  //     project => `
+  //       <ProjectCard
+  //         image={projectsWip}
+  //         title=${project.name}
+  //         description=${projects.description}
+  //         link=${project.url}
+  //       />
+  //     `
+  //   );
+  // }
 
   const TITLE = ''; // optional, if null the title with be the location.pathname
   const SUBTITLE = 'Here are some projects I have been working on';
 
-  const CONTENT = (
+  const CONTENT = projectsList || (
     <>
-      <Card
+      <ProjectCard
         image={projectsWip}
         title={'Portfolio website'}
         description={'A React website project with animated routes'}
       />
-      <Card
+      <ProjectCard
         image={projectsWip}
         title={'Coming soon!'}
         description={'Another project in the works'}
       />
-      <Card
+      <ProjectCard
         image={projectsWip}
         title={'Coming soon!'}
         description={'Another project in the works'}
       />
-      <Card
+      <ProjectCard
         image={projectsWip}
         title={'Coming soon!'}
         description={'Another project in the works'}

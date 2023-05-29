@@ -1,9 +1,9 @@
 import PageLayout from '../components/Layout/PageLayout';
 
-import Card from '../components/UI/Card';
+// import Card from '../components/UI/Card';
 import HomeButton from '../components/Nav/HomeButton';
 
-import testImg from '../images/test-image.jpg';
+// import testImg from '../images/test-image.jpg';
 
 function Renders() {
   const TITLE = ''; // optional, if null the title with be the location.pathname

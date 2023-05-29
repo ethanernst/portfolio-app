@@ -2,19 +2,13 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
-const CardElement = styled.div`
-  width: clamp(300px, 40%, 500px);
+const Container = styled.div`
+  width: auto;
   height: 300px;
   margin: 20px;
   border-radius: 20px;
   position: relative;
   transition: all 0.5s ease;
-
-  .image-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
 
   .image {
     width: 100%;
@@ -51,8 +45,8 @@ const CardElement = styled.div`
   }
 `;
 
-function Card({ image, title, description }) {
-  const [isHovered, setIsHovered] = useState(false);
+function Card({ image, title, description, hover = false }) {
+  const [isHovered, setIsHovered] = useState(hover);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -63,19 +57,17 @@ function Card({ image, title, description }) {
   };
 
   return (
-    <CardElement
-      hovered={isHovered}
+    <Container
+      hovered={hover || isHovered}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="image-container">
-        <img src={image} alt={title} className="image" />
-      </div>
+      <img src={image} alt={title} className="image" />
       <div className="text-container">
         <h3 className="title">{title}</h3>
         <p className="description">{description}</p>
       </div>
-    </CardElement>
+    </Container>
   );
 }
 
