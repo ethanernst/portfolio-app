@@ -1,6 +1,6 @@
 import PageLayout from '../components/Layout/PageLayout';
 
-import Card from '../components/UI/Card';
+import Card from '../components/UI/Cards/Card';
 import HomeButton from '../components/Nav/HomeButton';
 
 import testImg from '../images/test-image.jpg';

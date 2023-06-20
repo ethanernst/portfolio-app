@@ -17,11 +17,14 @@ const GlobalStyle = createGlobalStyle`
 
   --renders: #FF5D7B;
   --renders-light: #feadbb;
-  --renders-light: #82303f;
+  --renders-dark: #82303f;
 
   --about: #ED7A4F;
   --about-light: #f5bba5;
-  --about-light: #793f29;
+  --about-dark: #793f29;
+
+  --button-github: #6e5494;
+  --button-project: #838182;
 
   --z-index-home-background: 0;
   --z-index-home-popout: 25;
