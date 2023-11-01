@@ -30,6 +30,16 @@ const GlobalStyle = createGlobalStyle`
   --z-index-home-popout: 25;
   --z-index-home-content: 50;
   }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a:visited {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 export default GlobalStyle;

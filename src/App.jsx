@@ -4,52 +4,52 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RouteAnimator from './components/RouteAnimator';
 
 import Home from './pages/Home';
-import About from './pages/About';
+// import About from './pages/About';
 import Projects from './pages/Projects';
-import Renders from './pages/Renders';
-import Videos from './pages/Videos';
+// import Renders from './pages/Renders';
+// import Videos from './pages/Videos';
 import NotFound from './pages/NotFound';
 
 export const routes = [
   {
     path: '/',
-    name: 'Home',
-    animation: 'center',
+    name: 'home',
+    animation: 'page',
     element: <Home />,
     nodeRef: createRef(),
   },
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   animation: 'down',
+  //   element: <About />,
+  //   nodeRef: createRef(),
+  // },
   {
     path: '/projects',
-    name: 'Projects',
-    animation: 'left',
+    name: 'projects',
+    animation: 'page',
     element: <Projects />,
     nodeRef: createRef(),
   },
-  {
-    path: '/about',
-    name: 'About',
-    animation: 'down',
-    element: <About />,
-    nodeRef: createRef(),
-  },
-  {
-    path: '/videos',
-    name: 'Videos',
-    animation: 'right',
-    element: <Videos />,
-    nodeRef: createRef(),
-  },
-  {
-    path: '/renders',
-    name: 'Renders',
-    animation: 'up',
-    element: <Renders />,
-    nodeRef: createRef(),
-  },
+  // {
+  //   path: '/videos',
+  //   name: 'Videos',
+  //   animation: 'right',
+  //   element: <Videos />,
+  //   nodeRef: createRef(),
+  // },
+  // {
+  //   path: '/renders',
+  //   name: 'Renders',
+  //   animation: 'up',
+  //   element: <Renders />,
+  //   nodeRef: createRef(),
+  // },
   {
     path: '*',
     name: '404',
-    animation: 'center',
+    animation: 'page',
     element: <NotFound />,
     nodeRef: createRef(),
   },
