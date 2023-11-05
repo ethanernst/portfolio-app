@@ -6,15 +6,16 @@ const Container = styled.div`
   font-size: 3rem;
   background-color: transparent;
 
-  transition: background-color 1s ease-in;
-
-  :hover {
-    background-color: white;
-  }
-
   h2 {
     margin: 10px;
     padding: 30px;
+    border-radius: 10px;
+
+    transition: all 0.2s ease-in-out;
+  }
+
+  h2:hover {
+    background-color: white;
   }
 `;
 

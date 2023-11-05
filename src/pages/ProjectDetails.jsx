@@ -1,10 +1,8 @@
 import { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { GlobalContext } from '../store/GlobalContext';
-
-import ListItem from '../components/UI/ListItem';
 
 const Container = styled.div`
   margin: 0;
@@ -16,7 +14,7 @@ const Container = styled.div`
   grid-template-rows: repeat(10, 1fr);
   grid-template-columns: repeat(5, 1fr);
 
-  background-color: #666666;
+  background-color: 666666;
 
   /* Media query to adjust layout for smaller screens */
   @media (max-width: 768px) {
@@ -49,7 +47,7 @@ const Filter = styled.div`
     font: inherit;
     background-color: transparent;
     color: black;
-    padding: 20px 20px;
+    padding: 20px 80px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -87,35 +85,30 @@ const Preview = styled.div`
   }
 `;
 
-function Projects() {
+function ProjectDetails() {
+  const navigate = useNavigate();
   const location = useLocation();
+
   const projects = useContext(GlobalContext);
+  const currentProject = location.pathname.split('/').pop();
+  const projectData = projects.find(project => project.name === currentProject);
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   return (
     <Container>
       <Header>
-        <h1>projects</h1>
+        <h1>{currentProject}</h1>
       </Header>
       <Filter>
-        <button>filter</button>
+        <button onClick={handleGoBack}>back</button>
       </Filter>
-      <Links>
-        {projects &&
-          projects.map(project => {
-            if (project.name === 'ethanernst') return;
-            return (
-              <Link
-                key={project.name}
-                to={`${location.pathname}/${project.name}`}
-              >
-                <ListItem title={project.name} />
-              </Link>
-            );
-          })}
-      </Links>
+      <Links></Links>
       <Preview></Preview>
     </Container>
   );
 }
 
-export default Projects;
+export default ProjectDetails;

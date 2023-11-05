@@ -61,7 +61,7 @@ function Home() {
       </Header>
       <Links>
         {routes.map(route => {
-          if (route.path.length < 2) return;
+          if (route.path === '/' || route.path.split('/').length !== 2) return;
           return (
             <Link key={route.path} to={route.path}>
               <ListItem title={route.name} />

@@ -1,11 +1,14 @@
-import { createRef } from 'react';
+import { createRef, useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import { GlobalContextProvider } from './store/GlobalContext';
 
 import RouteAnimator from './components/RouteAnimator';
 
 import Home from './pages/Home';
 // import About from './pages/About';
 import Projects from './pages/Projects';
+import ProjectDetails from './pages/ProjectDetails';
 // import Renders from './pages/Renders';
 // import Videos from './pages/Videos';
 import NotFound from './pages/NotFound';
@@ -30,6 +33,13 @@ export const routes = [
     name: 'projects',
     animation: 'page',
     element: <Projects />,
+    nodeRef: createRef(),
+  },
+  {
+    path: '/projects/:id',
+    name: 'projectDetails',
+    animation: 'project',
+    element: <ProjectDetails />,
     nodeRef: createRef(),
   },
   // {
@@ -68,7 +78,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <GlobalContextProvider>
+      <RouterProvider router={router} />
+    </GlobalContextProvider>
+  );
 }
 
 export default App;
