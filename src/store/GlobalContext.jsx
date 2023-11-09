@@ -1,9 +1,13 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, createRef, useEffect, useState } from 'react';
+
+import ProjectDetails from '../pages/ProjectDetails';
 
 export const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
+  const [staticRoutes, setStaticRoutes] = useState([]);
+  const [dynamicRoutes, setDynamicRoutes] = useState([]);
 
   // initial projects loader
   useEffect(() => {
@@ -62,7 +66,31 @@ export const GlobalContextProvider = ({ children }) => {
     }
   }, []);
 
+  // generates the dynamic routes after projects have loaded
+  useEffect(() => {
+    if (!projects) return;
+
+    console.log('generating dynamic routes');
+    const newRoutes = projects
+      .filter(project => project.name !== 'ethanernst')
+      .map(project => {
+        return {
+          path: `/projects/${project.name}`,
+          name: project.name,
+          animation: 'page',
+          element: <ProjectDetails />,
+          nodeRef: createRef(),
+        };
+      });
+
+    setDynamicRoutes([...newRoutes]);
+  }, [projects]);
+
   return (
-    <GlobalContext.Provider value={projects}>{children}</GlobalContext.Provider>
+    <GlobalContext.Provider
+      value={{ projects, staticRoutes, setStaticRoutes, dynamicRoutes }}
+    >
+      {children}
+    </GlobalContext.Provider>
   );
 };

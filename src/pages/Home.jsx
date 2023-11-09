@@ -1,7 +1,8 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { routes } from '../App';
+import { GlobalContext } from '../store/GlobalContext';
 
 import ListItem from '../components/UI/ListItem';
 
@@ -54,20 +55,24 @@ const Preview = styled.div`
 `;
 
 function Home() {
+  const { staticRoutes } = useContext(GlobalContext);
+
   return (
     <Container>
       <Header>
         <h1>vault</h1>
       </Header>
       <Links>
-        {routes.map(route => {
-          if (route.path === '/' || route.path.split('/').length !== 2) return;
-          return (
-            <Link key={route.path} to={route.path}>
-              <ListItem title={route.name} />
-            </Link>
-          );
-        })}
+        {staticRoutes &&
+          staticRoutes.map(route => {
+            if (route.path === '/' || route.path.split('/').length !== 2)
+              return;
+            return (
+              <Link key={route.path} to={route.path}>
+                <ListItem title={route.name} size={'50px'} />
+              </Link>
+            );
+          })}
       </Links>
       <Preview></Preview>
     </Container>

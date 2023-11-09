@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { GlobalContext } from '../store/GlobalContext';
@@ -70,9 +70,50 @@ const Links = styled.div`
   overflow-y: scroll;
   background-color: transparent;
 
+  display: flex;
+  flex-direction: column;
+
   /* Expand on small screens */
   @media (max-width: 768px) {
     grid-column: 1 / -1;
+  }
+`;
+
+const LinkRow = styled.div`
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: min-content;
+  display: flex;
+
+  a:first-child {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  a:not(:first-child) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Hide links on small screens */
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  h3 {
+    height: auto;
+    width: min-content;
+    margin: 10px;
+    padding: 30px;
+    border-radius: 10px;
+
+    transition: all 0.2s ease-in-out;
+  }
+
+  h3:hover {
+    background-color: white;
   }
 `;
 
@@ -88,8 +129,13 @@ const Preview = styled.div`
 `;
 
 function Projects() {
+  const navigate = useNavigate();
   const location = useLocation();
-  const projects = useContext(GlobalContext);
+  const { projects } = useContext(GlobalContext);
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   return (
     <Container>
@@ -97,6 +143,7 @@ function Projects() {
         <h1>projects</h1>
       </Header>
       <Filter>
+        <button onClick={handleGoBack}>back</button>
         <button>filter</button>
       </Filter>
       <Links>
@@ -104,12 +151,19 @@ function Projects() {
           projects.map(project => {
             if (project.name === 'ethanernst') return;
             return (
-              <Link
-                key={project.name}
-                to={`${location.pathname}/${project.name}`}
-              >
-                <ListItem title={project.name} />
-              </Link>
+              <LinkRow key={project.name}>
+                <Link to={`${location.pathname}/${project.name}`}>
+                  <ListItem title={project.name} size={'2vw'} />
+                </Link>
+                <h3>
+                  <a href={project.html_url} target="_blank" rel="noreferrer">
+                    Github
+                  </a>
+                </h3>
+                <a href={project.homepage} target="_blank" rel="noreferrer">
+                  <h3>Project</h3>
+                </a>
+              </LinkRow>
             );
           })}
       </Links>

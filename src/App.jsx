@@ -1,19 +1,16 @@
-import { createRef, useEffect } from 'react';
+import { useContext, createRef, useEffect, useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-
-import { GlobalContextProvider } from './store/GlobalContext';
 
 import RouteAnimator from './components/RouteAnimator';
 
+import { GlobalContext } from './store/GlobalContext';
+
 import Home from './pages/Home';
-// import About from './pages/About';
 import Projects from './pages/Projects';
-import ProjectDetails from './pages/ProjectDetails';
-// import Renders from './pages/Renders';
-// import Videos from './pages/Videos';
 import NotFound from './pages/NotFound';
 
-export const routes = [
+// static routes
+const routes = [
   {
     path: '/',
     name: 'home',
@@ -33,13 +30,6 @@ export const routes = [
     name: 'projects',
     animation: 'page',
     element: <Projects />,
-    nodeRef: createRef(),
-  },
-  {
-    path: '/projects/:id',
-    name: 'projectDetails',
-    animation: 'project',
-    element: <ProjectDetails />,
     nodeRef: createRef(),
   },
   // {
@@ -65,24 +55,55 @@ export const routes = [
   },
 ];
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <RouteAnimator routes={routes} />,
-    children: routes.map(route => ({
-      index: route.path === '/',
-      path: route.path === '/' ? undefined : route.path,
-      element: route.element,
-    })),
-  },
-]);
-
 function App() {
-  return (
-    <GlobalContextProvider>
-      <RouterProvider router={router} />
-    </GlobalContextProvider>
+  const { dynamicRoutes, setStaticRoutes } = useContext(GlobalContext);
+
+  // update static routes in context on first load
+  // static routes need to be in this file to prevent errors
+  // trying to render an empty router on first load
+  useEffect(() => {
+    setStaticRoutes(routes);
+  }, []);
+
+  // set initial router
+  const [router, setRouter] = useState(
+    createBrowserRouter([
+      {
+        path: '/',
+        element: <RouteAnimator />,
+        children: routes.map(route => ({
+          index: route.path === '/',
+          path: route.path === '/' ? undefined : route.path,
+          element: route.element,
+        })),
+      },
+    ])
   );
+
+  // update router with dynamic routes once they are generated
+  useEffect(() => {
+    if (!dynamicRoutes) {
+      return;
+    }
+
+    const allRoutes = [...routes, ...dynamicRoutes];
+    console.log('updating routes: ', allRoutes);
+    const newRouter = createBrowserRouter([
+      {
+        path: '/',
+        element: <RouteAnimator />,
+        children: allRoutes.map(route => ({
+          index: route.path === '/',
+          path: route.path === '/' ? undefined : route.path,
+          element: route.element,
+        })),
+      },
+    ]);
+
+    setRouter(newRouter);
+  }, [dynamicRoutes]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;

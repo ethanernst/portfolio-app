@@ -89,9 +89,11 @@ function ProjectDetails() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const projects = useContext(GlobalContext);
+  const { projects } = useContext(GlobalContext);
   const currentProject = location.pathname.split('/').pop();
   const projectData = projects.find(project => project.name === currentProject);
+
+  console.log(projectData);
 
   const handleGoBack = () => {
     navigate(-1);

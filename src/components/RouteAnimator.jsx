@@ -1,14 +1,17 @@
+import { useContext } from 'react';
 import { useOutlet, useLocation } from 'react-router-dom';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import { GlobalContext } from '../store/GlobalContext';
 
-function RouteAnimator(props) {
-  const routes = props.routes;
-
+function RouteAnimator() {
   const location = useLocation();
   const currentPageOutlet = useOutlet();
 
-  const currentRoute =
-    routes.find(route => route.path === location.pathname) ?? {};
+  const { routes } = useContext(GlobalContext);
+
+  const currentRoute = routes
+    ? routes.find(route => route.path === location.pathname) ?? {}
+    : {};
   const { nodeRef } = currentRoute;
 
   const pageAnimation = currentRoute.animation;
@@ -18,7 +21,7 @@ function RouteAnimator(props) {
       <CSSTransition
         key={location.pathname}
         nodeRef={nodeRef}
-        timeout={200}
+        timeout={250}
         classNames={pageAnimation}
       >
         {_ => (
