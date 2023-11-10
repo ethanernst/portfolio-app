@@ -40,6 +40,32 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: inherit;
   }
+  
+  .fade-enter {
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  .fade-enter-active {
+    opacity: 1;
+    filter: blur(0px);
+    transition: all 250ms ease-in-out;
+  }
+
+  .fade-exit {
+    opacity: 1;
+    filter: blur(0px);
+  }
+
+  .fade-exit-active {
+    opacity: 0;
+    filter: blur(10px);
+    transition: all 250ms ease-in-out;
+  }
+  
+  .fade-exit-done {
+    display: none;
+  }
 `;
 
 export default GlobalStyle;

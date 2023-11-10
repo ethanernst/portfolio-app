@@ -88,7 +88,12 @@ export const GlobalContextProvider = ({ children }) => {
 
   return (
     <GlobalContext.Provider
-      value={{ projects, staticRoutes, setStaticRoutes, dynamicRoutes }}
+      value={{
+        projects,
+        staticRoutes,
+        setStaticRoutes,
+        dynamicRoutes,
+      }}
     >
       {children}
     </GlobalContext.Provider>
