@@ -170,7 +170,7 @@ function Projects() {
             );
           })}
       </Links>
-      <Preview gridRows={'4 / -1'} gridColumns={'4 / -1'} image={activeLink} />
+      <Preview gridRows={'4 / -1'} gridColumns={'4 / -1'} id={activeLink} />
     </Container>
   );
 }

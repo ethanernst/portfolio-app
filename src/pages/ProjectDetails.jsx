@@ -1,8 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { GlobalContext } from '../store/GlobalContext';
+
+import ProjectView from '../components/UI/ProjectView';
 
 const Container = styled.div`
   margin: 0;
@@ -74,25 +76,16 @@ const Links = styled.div`
   }
 `;
 
-const Preview = styled.div`
-  grid-row: 4 / -1;
-  grid-column: 4 / -1;
-  background-color: lightgray;
-
-  /* Hide on small screens */
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
 function ProjectDetails() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const { projects } = useContext(GlobalContext);
-  const currentProject = location.pathname.split('/').pop();
-  const projectData = projects.find(project => project.name === currentProject);
 
+  // memo here prevents project resetting when page is unloaded and animating out
+  const currentProject = useMemo(() => location.pathname.split('/').pop(), []);
+
+  const projectData = projects.find(project => project.name === currentProject);
   console.log(projectData);
 
   const handleGoBack = () => {
@@ -108,7 +101,11 @@ function ProjectDetails() {
         <button onClick={handleGoBack}>back</button>
       </Filter>
       <Links></Links>
-      <Preview></Preview>
+      <ProjectView
+        gridRows={'4 / -1'}
+        gridColumns={'1 / -1'}
+        id={currentProject}
+      />
     </Container>
   );
 }

@@ -5,9 +5,10 @@ import ProjectDetails from '../pages/ProjectDetails';
 export const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
-  const [projects, setProjects] = useState([]);
   const [staticRoutes, setStaticRoutes] = useState([]);
   const [dynamicRoutes, setDynamicRoutes] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [loadedImages, setLoadedImages] = useState([]);
 
   // initial projects loader
   useEffect(() => {
@@ -93,6 +94,8 @@ export const GlobalContextProvider = ({ children }) => {
         staticRoutes,
         setStaticRoutes,
         dynamicRoutes,
+        loadedImages,
+        setLoadedImages,
       }}
     >
       {children}

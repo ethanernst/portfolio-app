@@ -1,10 +1,11 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import Markdown from 'react-markdown';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  grid-row: ${({ row }) => row};
-  grid-column: ${({ column }) => column};
+  grid-row: ${({ $gridRows }) => $gridRows};
+  grid-column: ${({ $gridColumns }) => $gridColumns};
   width: 100%;
   height: 100%;
 
@@ -12,6 +13,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   overflow: hidden;
   background-color: lightgray;
 
@@ -21,33 +23,94 @@ const Container = styled.div`
   }
 `;
 
-const Image = styled.img`
-  width: 80%;
-  height: 100%;
-  object-fit: contain;
+const Description = styled.div`
+  width: 90%;
+  height: 50%;
+
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: ${({ $loaded }) => ($loaded ? 'start' : 'center')};
+  align-items: center;
+  overflow: hidden;
+
+  font-size: normal;
+
+  mask-image: linear-gradient(180deg, #000 60%, transparent);
+  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+
+  #defaultText {
+    justify-self: center;
+  }
 `;
 
-function Preview({ gridRows, gridColumns, image }) {
+const Image = styled.div`
+  width: 90%;
+  height: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    height: min-content;
+    width: 100%;
+
+    border: 5px solid white;
+    border-radius: 10px;
+    object-fit: contain;
+  }
+`;
+
+// Given a grid row/column through props
+// Loads the project readme and thumbnail from a given id
+function Preview({ gridRows, gridColumns, id }) {
+  const [descriptionMd, setDescriptionMd] = useState(null);
   const nodeRef = useRef(null);
 
-  const imgSrc = image
-    ? `https://raw.githubusercontent.com/ethanernst/${image}/main/thumbnail.jpg`
+  const imgSrc = id
+    ? `https://raw.githubusercontent.com/ethanernst/${id}/main/thumbnail.jpg`
     : null;
 
+  // description fetch effeect
+  useEffect(() => {
+    if (!id) {
+      setDescriptionMd(null);
+      return;
+    }
+
+    fetch(`https://raw.githubusercontent.com/ethanernst/${id}/main/README.md`)
+      .then(res => res.text())
+      .then(text => setDescriptionMd(text))
+      .catch(err => console.log(err));
+  }, [id]);
+
   return (
-    <Container row={gridRows} column={gridColumns}>
-      <SwitchTransition>
-        <CSSTransition
-          key={image}
+    <SwitchTransition>
+      <CSSTransition
+        key={id}
+        ref={nodeRef}
+        timeout={250}
+        classNames={'fade'}
+        unmountOnExit
+      >
+        <Container
           ref={nodeRef}
-          timeout={250}
-          classNames={'fade'}
-          unmountOnExit
+          $gridRows={gridRows}
+          $gridColumns={gridColumns}
         >
-          <Image ref={nodeRef} src={imgSrc} alt={'preview image'} />
-        </CSSTransition>
-      </SwitchTransition>
-    </Container>
+          <Description $loaded={!!descriptionMd}>
+            {descriptionMd && (
+              <Markdown disallowedElements={['img', 'a']}>
+                {descriptionMd}
+              </Markdown>
+            )}
+            {!descriptionMd && <h2>Hover a project for more details!</h2>}
+          </Description>
+          <Image>{imgSrc && <img src={imgSrc} alt={'preview image'} />}</Image>
+        </Container>
+      </CSSTransition>
+    </SwitchTransition>
   );
 }
 

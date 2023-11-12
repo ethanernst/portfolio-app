@@ -7,7 +7,9 @@ function RouteAnimator() {
   const location = useLocation();
   const currentPageOutlet = useOutlet();
 
-  const { routes } = useContext(GlobalContext);
+  const { staticRoutes, dynamicRoutes } = useContext(GlobalContext);
+
+  const routes = [...staticRoutes, ...dynamicRoutes];
 
   const currentRoute = routes
     ? routes.find(route => route.path === location.pathname) ?? {}
